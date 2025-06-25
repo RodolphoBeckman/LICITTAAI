@@ -16,16 +16,16 @@ import {z} from 'genkit';
 const ExplainLegalArticlesInputSchema = z.object({
   legalArticle: z
     .string()
-    .describe('The legal article to be explained, including the law number.'),
+    .describe('O artigo de lei a ser explicado, incluindo o número da lei.'),
 });
 export type ExplainLegalArticlesInput = z.infer<typeof ExplainLegalArticlesInputSchema>;
 
 const ExplainLegalArticlesOutputSchema = z.object({
   explanation: z
     .string()
-    .describe('Explanation of the legal article in plain language.'),
-  summary: z.string().describe('A brief summary of the legal article.'),
-  keyPoints: z.array(z.string()).describe('Key points of the legal article.'),
+    .describe('Explicação do artigo legal em linguagem simples.'),
+  summary: z.string().describe('Um breve resumo do artigo legal.'),
+  keyPoints: z.array(z.string()).describe('Pontos-chave do artigo legal.'),
 });
 export type ExplainLegalArticlesOutput = z.infer<typeof ExplainLegalArticlesOutputSchema>;
 
@@ -37,18 +37,13 @@ const prompt = ai.definePrompt({
   name: 'explainLegalArticlesPrompt',
   input: {schema: ExplainLegalArticlesInputSchema},
   output: {schema: ExplainLegalArticlesOutputSchema},
-  prompt: `You are an expert in administrative law, specializing in Law 14.133/2021, the New Brazilian Law on Bids and Contracts.
+  prompt: `Você é um especialista em direito administrativo, especializado na Lei 14.133/2021, a Nova Lei brasileira de Licitações e Contratos.
 
-You will receive a legal article as input. Your task is to provide a clear and concise explanation of the article in plain language, suitable for government workers who may not have extensive legal expertise. Additionally, provide a brief summary of the article and list the key points.
+Você receberá um artigo de lei como entrada. Sua tarefa é fornecer uma explicação clara e concisa do artigo em linguagem simples, adequada para funcionários do governo que podem não ter amplo conhecimento jurídico. Além disso, forneça um breve resumo do artigo e liste os pontos-chave. **Responda sempre em português.**
 
-Article: {{{legalArticle}}}
+Artigo: {{{legalArticle}}}
 
-Ensure that the explanation is easy to understand and highlights the practical implications of the article for public bids.
-
-Output should be structured as follows:
-Explanation: [Explanation of the legal article]
-Summary: [Brief summary of the legal article]
-Key Points: [List of key points, each on a new line]`,
+Garanta que a explicação seja fácil de entender e destaque as implicações práticas do artigo para as licitações públicas.`,
 });
 
 const explainLegalArticlesFlow = ai.defineFlow(
