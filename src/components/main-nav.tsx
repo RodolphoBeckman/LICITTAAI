@@ -9,10 +9,8 @@ import {
   History,
   Home,
   Library,
-  MessageSquare,
   Bot,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
   SidebarContent,
   SidebarHeader,
@@ -57,20 +55,18 @@ export function MainNav() {
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.href}>
-              <Link href={item.href} passHref legacyBehavior>
-                <SidebarMenuButton
-                  asChild
-                  isActive={pathname === item.href}
-                  tooltip={{
-                    children: item.label,
-                  }}
-                >
-                  <a>
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </a>
-                </SidebarMenuButton>
-              </Link>
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={{
+                  children: item.label,
+                }}
+              >
+                <Link href={item.href}>
+                  <item.icon />
+                  <span>{item.label}</span>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
