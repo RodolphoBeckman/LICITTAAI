@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,31 +11,35 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, Bot, Loader2 } from "lucide-react";
+import { Upload, Bot, Loader2, Image as ImageIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const formSchema = z.object({
   appName: z.string().min(1, "O nome do aplicativo é obrigatório."),
   logo: z.any().optional(),
+  sidebarImage: z.any().optional(),
 });
 
 export default function SettingsPage() {
-  const { appName, logoSrc, saveSettings, isLoading: isLoadingSettings } = useAppSettings();
+  const { appName, logoSrc, sidebarImageSrc, saveSettings, isLoading: isLoadingSettings } = useAppSettings();
   const { toast } = useToast();
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [sidebarImagePreview, setSidebarImagePreview] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     values: {
       appName: appName,
       logo: null,
+      sidebarImage: null,
     },
   });
 
   useEffect(() => {
     form.reset({ appName });
     setLogoPreview(logoSrc);
-  }, [appName, logoSrc, form]);
+    setSidebarImagePreview(sidebarImageSrc);
+  }, [appName, logoSrc, sidebarImageSrc, form]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -56,11 +61,25 @@ export default function SettingsPage() {
       reader.readAsDataURL(file);
     }
   };
+
+  const handleSidebarImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setSidebarImagePreview(base64String);
+        form.setValue("sidebarImage", base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   
   const onSubmit = (data: z.infer<typeof formSchema>) => {
      saveSettings({
       appName: data.appName,
       logoSrc: data.logo || logoPreview, 
+      sidebarImageSrc: data.sidebarImage || sidebarImagePreview,
     });
     toast({
       title: "Configurações salvas!",
@@ -82,7 +101,7 @@ export default function SettingsPage() {
         <CardHeader>
           <CardTitle className="font-headline">Configurações</CardTitle>
           <CardDescription>
-            Personalize o nome e o logo do seu aplicativo. As alterações são salvas localmente no seu navegador.
+            Personalize o nome e os logos do seu aplicativo. As alterações são salvas localmente no seu navegador.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -134,6 +153,40 @@ export default function SettingsPage() {
                       )}
                    />
                 </div>
+                <FormMessage />
+              </FormItem>
+              
+              <FormItem>
+                <FormLabel>Imagem da Barra Lateral (PNG, JPG)</FormLabel>
+                <div className="w-full aspect-video rounded-md border border-dashed flex items-center justify-center bg-muted/50 p-2">
+                  {sidebarImagePreview ? (
+                    <Image src={sidebarImagePreview} alt="Sidebar image preview" width={200} height={112} className="max-h-full w-auto object-contain rounded-md" />
+                  ) : (
+                    <div className="text-muted-foreground text-sm text-center">
+                      <ImageIcon className="mx-auto h-8 w-8 text-muted-foreground/50" />
+                      Nenhuma imagem
+                    </div>
+                  )}
+                </div>
+                <Controller
+                  control={form.control}
+                  name="sidebarImage"
+                  render={({ field }) => (
+                    <Button asChild variant="outline" className="w-full">
+                       <label htmlFor="sidebar-image-upload" className="cursor-pointer">
+                        <Upload className="mr-2 h-4 w-4" />
+                        Fazer Upload
+                        <input
+                          id="sidebar-image-upload"
+                          type="file"
+                          className="sr-only"
+                          accept="image/png, image/jpeg"
+                          onChange={handleSidebarImageChange}
+                        />
+                       </label>
+                    </Button>
+                  )}
+               />
                 <FormMessage />
               </FormItem>
 

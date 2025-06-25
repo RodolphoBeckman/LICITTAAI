@@ -46,7 +46,7 @@ const bottomMenuItems = [
 
 export function MainNav() {
   const pathname = usePathname();
-  const { appName, logoSrc, isLoading } = useAppSettings();
+  const { appName, logoSrc, sidebarImageSrc, isLoading } = useAppSettings();
 
   return (
     <>
@@ -98,26 +98,39 @@ export function MainNav() {
           ))}
         </SidebarMenu>
       </SidebarContent>
-      <SidebarFooter className="mt-auto border-t border-sidebar-border">
-        <SidebarMenu>
-          {bottomMenuItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
-              <SidebarMenuButton
-                asChild
-                isActive={pathname === item.href}
-                tooltip={{
-                  children: item.label,
-                }}
-              >
-                <Link href={item.href}>
-                  <item.icon />
-                  <span>{item.label}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarFooter>
+      <div className="mt-auto">
+        {sidebarImageSrc && (
+          <div className="p-4 group-data-[collapsible=icon]:hidden">
+            <Image
+              src={sidebarImageSrc}
+              alt="Imagem da barra lateral"
+              width={200}
+              height={200}
+              className="w-full h-auto max-h-40 rounded-md object-contain"
+            />
+          </div>
+        )}
+        <SidebarFooter className="border-t border-sidebar-border">
+          <SidebarMenu>
+            {bottomMenuItems.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === item.href}
+                  tooltip={{
+                    children: item.label,
+                  }}
+                >
+                  <Link href={item.href}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarFooter>
+      </div>
     </>
   );
 }
