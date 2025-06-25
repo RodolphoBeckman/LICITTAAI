@@ -38,7 +38,7 @@ const menuItems = [
 
 // Para usar seu próprio logo, cole sua string base64 aqui.
 // Por exemplo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg..."
-const logoSrc = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48Y2lyY2xlIHI9IjE2IiBjeD0iMTYiIGN5PSIxNiIgZmlsbD0iIzI5QUJFMiIgLz48dGV4dCB4PSI1MCUiIHk9IjU1JSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMjBweCIgZm9udC1mYW1pbHk9IlBvcHBpbnMiIGZvbnQtd2VpZ2h0PSJib2xkIj5MPC90ZXh0Pjwvc3ZnPg==";
+const logoSrc = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMCAzMCBDIDMwIDEwLCA0MCAxMCwgNjAgMzAgUyA4MCA1MCwgOTAgMzAiIHN0cm9rZT0iaHNsKDE5NyA3MSUgNTIlKSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJ0cmFuc3BhcmVudCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEwIDYwIEMgMzAgNDAsIDQwIDQwLCA2MCA2MCBTIDgwIDgwLCA5MCA2MCIgc3Ryb2tlPSJoc2woMTk3IDcxJSA1MiUpIiBzdHJvaxUtd2lkdGg9IjgiIGZpbGw9InRyYW5zcGFyZW50IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
 
 export function MainNav() {
   const pathname = usePathname();
@@ -46,7 +46,7 @@ export function MainNav() {
   return (
     <>
       <SidebarHeader className="border-b border-sidebar-border">
-          <Link href="/dashboard" className="h-auto p-2 flex items-center gap-2">
+          <div className="h-auto p-2 flex items-center gap-2">
             <Image 
               src={logoSrc}
               alt="LICITA-IA Logo" 
@@ -57,7 +57,7 @@ export function MainNav() {
             <span className="font-headline font-semibold text-lg group-data-[collapsible=icon]:hidden">
               LICITA-IA
             </span>
-          </Link>
+          </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
