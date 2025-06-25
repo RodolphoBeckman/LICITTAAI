@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   BookText,
@@ -11,6 +11,7 @@ import {
   Library,
   Bot,
   Settings,
+  LogOut,
 } from "lucide-react";
 import {
   SidebarContent,
@@ -46,7 +47,13 @@ const bottomMenuItems = [
 
 export function MainNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const { appName, logoSrc, sidebarImageSrc, isLoading } = useAppSettings();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    router.push("/login");
+  };
 
   return (
     <>
@@ -128,6 +135,17 @@ export function MainNav() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                onClick={handleLogout}
+                tooltip={{
+                  children: "Sair",
+                }}
+              >
+                <LogOut />
+                <span>Sair</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>
       </div>
