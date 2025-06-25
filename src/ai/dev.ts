@@ -1,1 +1,6 @@
-// Flows will be imported for their side effects in this file.
+import { config } from 'dotenv';
+config();
+
+import '@/ai/flows/generate-term-of-reference.ts';
+import '@/ai/flows/explain-legal-articles.ts';
+import '@/ai/flows/ask-ai-legal-questions.ts';
