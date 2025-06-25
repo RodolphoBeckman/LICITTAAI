@@ -1,3 +1,5 @@
+"use client";
+
 import { Header } from "@/components/header";
 import { MainNav } from "@/components/main-nav";
 import {
@@ -5,6 +7,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
+import DynamicTitle from "@/components/dynamic-title";
 
 export default function AppLayout({
   children,
@@ -13,6 +16,7 @@ export default function AppLayout({
 }) {
   return (
     <SidebarProvider>
+      <DynamicTitle />
       <Sidebar variant="inset" collapsible="icon">
         <MainNav />
       </Sidebar>

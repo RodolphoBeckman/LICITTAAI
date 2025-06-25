@@ -3,8 +3,8 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LICITA-IA Mini",
-  description: "Assistente Inteligente em Licitações e Contratos",
+  title: "App",
+  description: "Gerado pelo Firebase Studio",
 };
 
 export default function RootLayout({
