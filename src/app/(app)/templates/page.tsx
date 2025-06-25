@@ -44,7 +44,7 @@ export default function TemplatesPage() {
           Acesse modelos aprovados e atualizados conforme a Nova Lei de Licitações.
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {templates.map((template, index) => (
           <Card key={index} className="flex flex-col">
             <CardHeader>
@@ -57,7 +57,7 @@ export default function TemplatesPage() {
             <CardContent className="flex-1">
               <p className="text-sm text-muted-foreground">{template.description}</p>
             </CardContent>
-            <div className="p-4 pt-0 flex justify-end gap-2">
+            <div className="p-4 pt-0 flex flex-wrap justify-end gap-2">
                 <Button variant="outline" size="sm" disabled>
                     <Download className="mr-2 h-4 w-4" /> PDF
                 </Button>

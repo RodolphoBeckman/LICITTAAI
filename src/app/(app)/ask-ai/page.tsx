@@ -64,12 +64,12 @@ export default function AskAiPage() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-10rem)] max-w-3xl mx-auto">
+    <div className="flex flex-col h-full max-w-3xl mx-auto">
       <div className="flex-1 overflow-y-auto pr-4">
         <ScrollArea className="h-full" ref={scrollAreaRef}>
           <div className="space-y-6">
             {messages.length === 0 && (
-                <div className="text-center p-8 text-muted-foreground">
+                <div className="flex flex-col items-center justify-center min-h-[300px] text-center p-8 text-muted-foreground">
                     <Bot className="mx-auto h-12 w-12 mb-4" />
                     <h2 className="text-xl font-semibold font-headline">Consultor Jurídico IA</h2>
                     <p>Faça sua pergunta sobre a Lei 14.133/2021.</p>

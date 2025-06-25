@@ -75,28 +75,28 @@ export default function HistoryPage() {
         </p>
       </div>
 
-      <div className="border rounded-lg">
+      <div className="border rounded-lg overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Processo</TableHead>
               <TableHead>Objeto</TableHead>
               <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-right">Data de Início</TableHead>
+              <TableHead className="hidden text-right md:table-cell">Data de Início</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {history.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.id}</TableCell>
+                <TableCell className="font-medium whitespace-nowrap">{item.id}</TableCell>
                 <TableCell>{item.object}</TableCell>
                 <TableCell className="text-center">
                   <Badge variant={statusVariant[item.status] || "default"}>
                     {item.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">{item.date}</TableCell>
+                <TableCell className="hidden text-right whitespace-nowrap md:table-cell">{item.date}</TableCell>
                 <TableCell className="text-right">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>

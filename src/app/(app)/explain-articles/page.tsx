@@ -70,7 +70,7 @@ export default function ExplainArticlesPage() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-start gap-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4">
               <FormField
                 control={form.control}
                 name="legalArticle"
@@ -84,7 +84,7 @@ export default function ExplainArticlesPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading} className="w-40">
+              <Button type="submit" disabled={isLoading} className="w-full sm:w-40">
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

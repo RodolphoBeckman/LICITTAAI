@@ -83,7 +83,7 @@ export default function GenerateTermPage() {
   };
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <Card>
         <CardHeader>
           <CardTitle className="font-headline">Gerar Termo de Referência</CardTitle>
@@ -121,7 +121,7 @@ export default function GenerateTermPage() {
                   </FormItem>
                 )}
               />
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <FormField control={form.control} name="objectType" render={({ field }) => (<FormItem><FormLabel>Tipo de Objeto</FormLabel><FormControl><Input placeholder="Ex: Educação" {...field} /></FormControl><FormMessage /></FormItem>)} />
                 <FormField control={form.control} name="municipalityName" render={({ field }) => (<FormItem><FormLabel>Nome do Município</FormLabel><FormControl><Input placeholder="Ex: Cidade Feliz" {...field} /></FormControl><FormMessage /></FormItem>)} />
                 <FormField control={form.control} name="estimatedValue" render={({ field }) => (<FormItem><FormLabel>Valor Estimado (R$)</FormLabel><FormControl><Input placeholder="Ex: 1.200.000,00" {...field} /></FormControl><FormMessage /></FormItem>)} />
@@ -144,7 +144,7 @@ export default function GenerateTermPage() {
             Abaixo está o documento gerado pela IA. Revise antes de utilizar.
           </CardDescription>
         </CardHeader>
-        <CardContent className="h-[500px] flex flex-col">
+        <CardContent className="h-[400px] flex flex-col lg:h-[500px]">
           {isLoading ? (
             <div className="space-y-4 flex-1">
               <Skeleton className="h-4 w-3/4" />
@@ -164,7 +164,7 @@ export default function GenerateTermPage() {
             />
           )}
         </CardContent>
-        <CardFooter className="flex justify-end gap-2">
+        <CardFooter className="flex flex-wrap justify-end gap-2">
           <Button variant="outline" size="sm" onClick={copyToClipboard} disabled={!generatedTerm || isLoading}>
             <Copy className="mr-2 h-4 w-4" /> Copiar
           </Button>
