@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Bot } from "lucide-react";
 import { useAppSettings } from "@/hooks/use-app-settings";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const formSchema = z.object({
   username: z.string().min(1, "O nome de usuário é obrigatório."),
@@ -20,7 +21,7 @@ const formSchema = z.object({
 export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const { appName } = useAppSettings();
+  const { appName, logoSrc } = useAppSettings();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,9 +52,15 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-secondary p-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <div className="mx-auto h-16 w-16 flex items-center justify-center bg-primary text-primary-foreground rounded-full mb-4">
-             <Bot className="h-8 w-8" />
-          </div>
+          <Avatar className="mx-auto h-16 w-16 mb-4">
+            {logoSrc ? (
+              <AvatarImage src={logoSrc} alt="App Logo" className="object-contain" />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <Bot className="h-8 w-8" />
+              </div>
+            )}
+          </Avatar>
           <CardTitle className="text-2xl font-headline">Bem-vindo ao {appName}</CardTitle>
           <CardDescription>Faça login para continuar</CardDescription>
         </CardHeader>
