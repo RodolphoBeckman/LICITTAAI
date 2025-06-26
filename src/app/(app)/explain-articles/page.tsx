@@ -48,12 +48,12 @@ export default function ExplainArticlesPage() {
       const result = await explainLegalArticles(values);
       setExplanation(result);
     } catch (error) {
+      console.error("AI Flow Error:", error);
       toast({
         variant: "destructive",
-        title: "Erro ao buscar explicação",
-        description: "Ocorreu um erro ao se comunicar com a IA. Tente novamente.",
+        title: "Erro de Comunicação com a IA",
+        description: "Não foi possível conectar ao serviço de IA. Verifique se a chave de API do Google está configurada corretamente nas variáveis de ambiente do seu projeto no Firebase.",
       });
-      console.error(error);
     } finally {
       setIsLoading(false);
     }

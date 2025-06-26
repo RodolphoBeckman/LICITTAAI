@@ -54,12 +54,12 @@ export default function AskAiPage() {
       setMessages((prev) => [...prev, { role: "ai", content: result.answer }]);
     } catch (error) {
       setMessages((prev) => prev.filter(msg => msg.role !== 'loading'));
+      console.error("AI Flow Error:", error);
       toast({
         variant: "destructive",
-        title: "Erro na consulta",
-        description: "Ocorreu um erro ao se comunicar com a IA. Tente novamente.",
+        title: "Erro de Comunicação com a IA",
+        description: "Não foi possível conectar ao serviço de IA. Verifique se a chave de API do Google está configurada corretamente nas variáveis de ambiente do seu projeto no Firebase.",
       });
-      console.error(error);
     }
   }
 
