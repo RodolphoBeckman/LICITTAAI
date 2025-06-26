@@ -97,9 +97,6 @@ const generateTermOfReferenceFlow = ai.defineFlow(
     outputSchema: GenerateTermOfReferenceOutputSchema,
   },
   async input => {
-    if (!process.env.GOOGLE_API_KEY) {
-      throw new Error("A chave de API do Google (GOOGLE_API_KEY) não está configurada no ambiente. Por favor, adicione-a nas configurações do seu backend do App Hosting no console do Firebase.");
-    }
     const {output} = await prompt(input);
     return output!;
   }
