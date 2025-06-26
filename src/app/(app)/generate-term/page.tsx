@@ -64,10 +64,11 @@ export default function GenerateTermPage() {
       setGeneratedTerm(result.termOfReference);
     } catch (error) {
       console.error("AI Flow Error:", error);
+      const errorMessage = error instanceof Error ? error.message : "Ocorreu um erro desconhecido.";
       toast({
         variant: "destructive",
         title: "Erro de Comunicação com a IA",
-        description: "Não foi possível conectar ao serviço de IA. Verifique se a chave de API do Google está configurada corretamente nas variáveis de ambiente do seu projeto no Firebase.",
+        description: errorMessage,
       });
     } finally {
       setIsLoading(false);
