@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 const APP_NAME_KEY = "appName";
 const LOGO_SRC_KEY = "logoSrc";
 const SIDEBAR_IMAGE_SRC_KEY = "sidebarImageSrc";
-const DEFAULT_APP_NAME = "LICITA-IA";
+const DEFAULT_APP_NAME = "LICITTA-IA";
 
 type AppSettings = {
   appName: string;
